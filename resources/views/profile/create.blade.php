@@ -62,6 +62,12 @@
 					<input type="text" value="{{ old('age') }}" name="age">
 				</div>
 			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Picture</label>
+				<div class="col-sm-10">
+					<input type="file" name="avatar">
+				</div>
+			</div>
 			<button type="submit" class="btn btn-primary">SAVE</button>
 		</form>
 	</div>
