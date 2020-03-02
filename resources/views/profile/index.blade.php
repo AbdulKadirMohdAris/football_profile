@@ -15,30 +15,18 @@
 				</tr>
 			</thead>
 			<tbody>
+				@foreach($profiles as $profile)
 				<tr>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
+					<td>{{ $loop->iteration }}</td>
+					<td>
+						<img src="{{ url('storage/avatars/' . $profile->avatar) }}">
+					</td>
+					<td>{{ $profile->name }}</td>
+					<td>{{ $profile->country->name }}</td>
+					<td>{{ $profile->position->desc }}</td>
+					<td>{{ $profile->current_team }}</td>
 				</tr>
-				<tr>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-				</tr>
-				<tr>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-					<td>asdas</td>
-				</tr>
+				@endforeach
 			</tbody>
 		</table>
 	</div>

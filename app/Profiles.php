@@ -8,11 +8,11 @@ class Profiles extends Model
 {
     public function country()
     {
-        return $this->hasOne('App\Country');
+        return $this->belongsTo('App\Country', 'nationality_id');
     }
 
     public function position()
     {
-        return $this->hasOne('App\Position');
+        return $this->belongsTo('App\Position');
     }
 }
