@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
 	<div class="col-10 offset-1">
-		<form method="POST">
+		<form method="POST" enctype="multipart/form-data">
 			@csrf
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Name</label>

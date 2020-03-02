@@ -8,6 +8,7 @@ use App\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class ProfilesController extends Controller
 {
@@ -51,19 +52,19 @@ class ProfilesController extends Controller
         $profile->current_team = request('current_team');
         $profile->birthday = request('birthday');
         $profile->age = request('age');
-        if (isset($request->avatar)) {
-            if ($request->file('avatar')->isValid()) {
-                // $destinationPath = "images/artists/";
-                $extension = $request->file('avatar')->getClientOriginalExtension();
-                $fileName = str_random(32) . '.' . $extension;
-                $request->file('avatar')->move($fileName);
+        // if (isset($request->avatar)) {
+        //     if ($request->file('avatar')->isValid()) {
+        //         // $destinationPath = "images/artists/";
+        //         $extension = $request->file('avatar')->getClientOriginalExtension();
+        //         $fileName = Str::random(32) . '.' . $extension;
+        //         $request->file('avatar')->move($fileName);
 
-                // standardize the image dimension (optional)
-                Image::make($destinationPath.$fileName)->fit(350, 450)->save();
+        //         // standardize the image dimension (optional)
+        //         Image::make($fileName)->fit(350, 450)->save();
 
-                $artist->avatar = '/' . $destinationPath . $fileName;
-            }
-        }
+        //         $artist->avatar = '/' . $fileName;
+        //     }
+        // }
         $profile->avatar = $request->file('avatar');
         $filename = time().$profile->getClientOriginalName();
 
