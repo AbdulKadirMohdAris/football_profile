@@ -53,7 +53,7 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label">Birthday</label>
 				<div class="col-sm-10">
-					<input type="text" value="{{ old('birthday') }}" name="birthday">
+					<input type="date" value="{{ old('birthday') }}" name="birthday">
 				</div>
 			</div>
 			<div class="form-group row">

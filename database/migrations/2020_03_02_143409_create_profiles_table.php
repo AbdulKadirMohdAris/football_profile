@@ -18,8 +18,8 @@ class CreateProfilesTable extends Migration
             $table->string('name');
             $table->unsignedInteger('position_id')->nullable();
             $table->unsignedInteger('nationality_id')->nullable();
-            $table->decimal('height', 2, 2);
-            $table->decimal('weight', 3, 2);
+            $table->decimal('height', 3, 2);
+            $table->decimal('weight', 5, 2);
             $table->string('current_team')->nullable();
             $table->date('birthday');
             $table->smallInteger('age');
