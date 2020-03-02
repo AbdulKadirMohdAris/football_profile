@@ -12,3 +12,5 @@
 */
 
 Route::get('/', 'ProfilesController@index');
+Route::get('create/profile', 'ProfilesController@create');
+Route::post('create/profile', 'ProfilesController@store');

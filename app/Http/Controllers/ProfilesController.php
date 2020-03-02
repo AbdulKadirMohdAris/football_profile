@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Profiles;
+use App\Country;
+use App\Position;
 use Illuminate\Http\Request;
 
 class ProfilesController extends Controller
@@ -24,7 +26,10 @@ class ProfilesController extends Controller
      */
     public function create()
     {
-        //
+        $countries = Country::get();
+        $positions = Position::get();
+
+        return view('profile.create', compact('countries', 'positions'));
     }
 
     /**
@@ -35,7 +40,18 @@ class ProfilesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $profile = new Profiles();
+        $profile->name = request('name');
+        $profile->position_id = request('position_id');
+        $profile->nationality_id = request('nationality_id');
+        $profile->height = request('height');
+        $profile->weight = request('weight');
+        $profile->current_team = request('current_team');
+        $profile->birthday = request('birthday');
+        $profile->age = request('age');
+        // $profile->avatar = request('avatar');
+        dd($profile);
+        $profile->save();
     }
 
     /**
