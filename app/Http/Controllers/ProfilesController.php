@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Profiles;
 use App\Country;
 use App\Position;
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -43,7 +44,7 @@ class ProfilesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProfileRequest $request)
     {
         $profile = new Profiles();
         $profile->name = request('name');
@@ -58,6 +59,8 @@ class ProfilesController extends Controller
         $profile->avatar = $path;
         // dd($profile);
         $profile->save();
+
+        return redirect('/');
     }
 
     /**
@@ -68,7 +71,7 @@ class ProfilesController extends Controller
      */
     public function show(Profiles $profiles)
     {
-        //
+        return view('profile.show', compact('profiles'));
     }
 
     /**
@@ -79,7 +82,10 @@ class ProfilesController extends Controller
      */
     public function edit(Profiles $profiles)
     {
-        //
+        $countries = Country::get();
+        $positions = Position::get();
+
+        return view('profile.edit', compact('countries', 'positions', 'profiles'));
     }
 
     /**
@@ -91,7 +97,22 @@ class ProfilesController extends Controller
      */
     public function update(Request $request, Profiles $profiles)
     {
-        //
+        $profiles->name = request('name');
+        $profiles->position_id = request('position_id');
+        $profiles->nationality_id = request('nationality_id');
+        $profiles->height = request('height');
+        $profiles->weight = request('weight');
+        $profiles->current_team = request('current_team');
+        $profiles->birthday = request('birthday');
+        $profiles->age = request('age');
+        if($request->avatar)
+        {
+            $path = Storage::putFile('avatars', $request->file('avatar'));
+            $profiles->avatar = $path;
+        }
+        $profiles->save();
+
+        return redirect('/');
     }
 
     /**
@@ -102,6 +123,8 @@ class ProfilesController extends Controller
      */
     public function destroy(Profiles $profiles)
     {
-        //
+        $profiles->forceDelete();
+
+        return redirect('/');
     }
 }

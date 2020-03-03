@@ -14,3 +14,7 @@
 Route::get('/', 'ProfilesController@index');
 Route::get('create/profile', 'ProfilesController@create');
 Route::post('create/profile', 'ProfilesController@store');
+Route::get('edit/profile/{profiles}', 'ProfilesController@edit');
+Route::post('edit/profile/{profiles}', 'ProfilesController@update');
+Route::get('show/profile/{profiles}', 'ProfilesController@show');
+Route::get('delete/profile/{profiles}', 'ProfilesController@destroy');

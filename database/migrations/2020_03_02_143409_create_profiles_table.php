@@ -24,6 +24,7 @@ class CreateProfilesTable extends Migration
             $table->date('birthday');
             $table->smallInteger('age');
             $table->string('avatar');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
