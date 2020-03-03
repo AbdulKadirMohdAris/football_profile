@@ -18,9 +18,29 @@ class ProfilesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $profiles = Profiles::get();
+        $q = $request->q;
+
+        $profiles = Profiles::select('profiles.*')
+            ->join('countries', 'profiles.nationality_id', 'countries.id')
+            ->join('positions', 'profiles.position_id', 'positions.id');
+
+        if($q)
+        {
+            $profiles = $profiles->where(function($query) use($q)
+            {
+                $query->where('profiles.name', 'LIKE', '%' . $q . '%')
+                ->orWhere('profiles.height', 'LIKE', '%' . $q . '%')
+                ->orWhere('profiles.weight', 'LIKE', '%' . $q . '%')
+                ->orWhere('profiles.current_team', 'LIKE', '%' . $q . '%')
+                ->orWhere('profiles.age', 'LIKE', '%' . $q . '%')
+                ->orWhere('countries.name', 'LIKE', '%' . $q . '%')
+                ->orWhere('positions.desc', 'LIKE', '%' . $q . '%') ;
+            });
+        }
+        $profiles = $profiles->orderBy('created_at', 'desc')
+            ->get();
 
         return view('profile.index', compact('profiles'));
     }
